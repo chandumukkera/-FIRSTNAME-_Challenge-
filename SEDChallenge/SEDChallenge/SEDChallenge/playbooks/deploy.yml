@@ -1,0 +1,9 @@
+---
+- name: Deploy Static Content
+  hosts: launched
+  become: yes
+  tasks:
+    - name: Copy HTML file to web server root directory
+      copy:
+        src: index.html
+        dest: /usr/share/nginx/html/index.html

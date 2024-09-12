@@ -1,0 +1,7 @@
+---
+- hosts: all
+  tasks:
+    - name: Deploy Static Content
+      copy:
+        src: index.html
+        dest: /usr/share/nginx/html/index.html

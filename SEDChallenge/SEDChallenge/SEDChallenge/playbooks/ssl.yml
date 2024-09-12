@@ -1,0 +1,7 @@
+---
+- name: Generate Self-signed SSL Certificate
+  hosts: launched
+  become: yes
+  tasks:
+    - name: Generate SSL certificate
+      command: "openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt"

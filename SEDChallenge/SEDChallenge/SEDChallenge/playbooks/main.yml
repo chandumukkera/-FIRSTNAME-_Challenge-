@@ -1,0 +1,9 @@
+---
+- name: Deploy Static Web Application
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - include: provision.yml
+    - include: configure_webserver.yml
+    - include: ssl.yml
+    - include: deploy.yml

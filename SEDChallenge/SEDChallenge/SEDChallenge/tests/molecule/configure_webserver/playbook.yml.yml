@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+    - name: Ensure Nginx is installed
+      yum:
+        name: nginx
+        state: present
+
+    - name: Ensure Nginx service is enabled and started
+      service:
+        name: nginx
+        state: started
+        enabled: yes
