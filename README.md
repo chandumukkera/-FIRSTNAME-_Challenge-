@@ -4,15 +4,15 @@ Solution for Readme file
  Repository Name
  mdoctore
 
-
- from datetime import datetime
+```python
+from datetime import datetime
 import json
- 
+
 def transform_value(value):
-	if isinstance(value, dict):
+    if isinstance(value, dict):
         data_type, value = value.popitem()
- 
-    	if data_type == 'S':
+
+        if data_type == 'S':
             if value.startswith("RFC3339"):
                 value = int(datetime.strptime(value[8:], "%Y-%m-%dT%H:%M:%SZ").timestamp())
             return value.strip()  # Strip trailing whitespace
@@ -35,13 +35,13 @@ def transform_value(value):
             for key, val in value.items():
                 transformed_map[key] = transform_value(val)
             return transformed_map
-	else:
+    else:
         return value
- 
+
 def transform_json(input_json):
     transformed_json = {}
-	for key, value in input_json.items():
-    	if key == 'map_1':
+    for key, value in input_json.items():
+        if key == 'map_1':
             transformed_map = transform_value(value)
             if 'list_1' in transformed_map and isinstance(transformed_map['list_1'], list):
                 transformed_map['list_1'] = [transform_value(item) for item in transformed_map['list_1'] if item]
@@ -50,21 +50,22 @@ def transform_json(input_json):
             transformed_json[key] = transformed_map
         elif key in ['number_1', 'string_1']:
             transformed_json[key] = transform_value(value)
-	    elif key == 'string_2':
+        elif key == 'string_2':
             transformed_json[key] = int(datetime.strptime(value['S'], "%Y-%m-%dT%H:%M:%SZ").timestamp())
-	return transformed_json
- 
+    return transformed_json
+
 # Read input from file
 input_file = 'input.json'
 with open(input_file, 'r') as file:
-	input_json = json.load(file)
- 
+    input_json = json.load(file)
+
 # Transform the input JSON
 output_data = transform_json(input_json)
- 
+
 # Print the transformed JSON to stdout as a formatted JSON string
 print(json.dumps([output_data], indent=2))
 
+```
 
 
 
